@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --font-knewave: 'Knewave', cursive;
+  --font-roboto: 'Roboto', sans-serif;
+  --background-image-mobile: url("./assets/Background-Mobile.png");
+  --background-image-desktop: url("./assets/Background-Desktop.png");
+}
