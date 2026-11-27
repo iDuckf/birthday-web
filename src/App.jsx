@@ -1,12 +1,16 @@
 import "./tailwind.css";
 import cakeImg from "./assets/Kue-Edited.png";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { supabase } from "./lib/supabaseClient"; // sesuaikan path-nya
+import MemoriesModal from "./components/MemoriesModal";
 
 function App() {
     // ... di dalam komponen:
     const [wish, setWish] = useState("");
     const [status, setStatus] = useState("idle"); // idle | loading | success | error
+    const [memoriesOpen, setMemoriesOpen] = useState(false);
+
+    const closeMemories = useCallback(() => setMemoriesOpen(false), []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,7 +42,7 @@ function App() {
                     <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-center lg:gap-8 xl:gap-16">
                         {/* TITLE CONTAINER */}
                         <div className="w-full max-w-xl py-2 lg:max-w-lg xl:max-w-2xl xl:py-10">
-                            <div className="flex items-center gap-2 rounded-full border-2 border-[#BC9DEA] bg-[#EFDEFC] p-2 sm:gap-4">
+                            <div className="flex w-fit max-w-full items-center gap-2 rounded-full border-2 border-[#BC9DEA] bg-[#EFDEFC] p-2 sm:gap-3 lg:w-100 lg:gap-4">
                                 <i className="fa-solid fa-heart text-lg text-[#FFACCC] sm:text-xl lg:text-2xl shrink-0"></i>
                                 <p className="text-center text-xs leading-tight font-bold font-roboto text-[#5A2A6D] sm:text-sm lg:text-base xl:text-lg">
                                     A special day for someone special
@@ -46,7 +50,7 @@ function App() {
                                 <i className="fa-regular fa-heart text-lg text-[#FFACCC] sm:text-xl lg:text-2xl shrink-0"></i>
                             </div>
 
-                            <div className="py-2 text-center">
+                            <div className="py-2 text-start">
                                 <h1 className="pb-2 font-knewave text-4xl leading-tight text-[#5A2A6D] sm:text-5xl md:text-6xl lg:text-7xl xl:pb-4 xl:text-9xl">
                                     Happy
                                 </h1>
@@ -55,7 +59,7 @@ function App() {
                                 </h1>
                             </div>
 
-                            <div className="py-6 text-center xl:py-10">
+                            <div className="py-6 text-start xl:py-10">
                                 <p className="text-sm font-bold font-roboto text-[#9976AE] sm:text-base xl:text-lg">
                                     Wishing you all the happiness, good health,
                                 </p>
@@ -63,6 +67,16 @@ function App() {
                                     and success in everything you do.
                                 </p>
                             </div>
+
+                            <button
+                                type="button"
+                                onClick={() => setMemoriesOpen(true)}
+                                className="group inline-flex items-center gap-2 rounded-full border-2 border-[#F3B7D8] bg-linear-to-r from-[#FFF0F8] to-[#F4E2FF] px-4 py-2 font-roboto text-xs font-bold text-[#9C3E7A] shadow-md transition hover:scale-105 hover:shadow-lg sm:px-5 sm:py-2.5 sm:text-sm lg:text-base"
+                            >
+                                <i className="fa-solid fa-images text-[#E36198]"></i>
+                                See Our Memories
+                                <i className="fa-solid fa-heart text-[#FFACCC] transition group-hover:scale-125"></i>
+                            </button>
                         </div>
 
                         {/* CAKE IMAGE */}
@@ -190,6 +204,8 @@ function App() {
                     </div>
                 </div>
             </div>
+
+            {memoriesOpen && <MemoriesModal onClose={closeMemories} />}
         </>
     );
 }

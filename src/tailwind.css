@@ -5,4 +5,16 @@
   --font-roboto: 'Roboto', sans-serif;
   --background-image-mobile: url("./assets/Background-Mobile.png");
   --background-image-desktop: url("./assets/Background-Desktop.png");
+  --animate-memory-in: memory-in 350ms ease-out;
+
+  @keyframes memory-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
