@@ -3,6 +3,7 @@ import cakeImg from "./assets/Kue-Edited.png";
 import { useCallback, useState } from "react";
 import { supabase } from "./lib/supabaseClient"; // sesuaikan path-nya
 import MemoriesModal from "./components/MemoriesModal";
+import BackgroundMusic from "./components/BackgroundMusic";
 
 function App() {
     // ... di dalam komponen:
@@ -206,6 +207,7 @@ function App() {
             </div>
 
             {memoriesOpen && <MemoriesModal onClose={closeMemories} />}
+            <BackgroundMusic />
         </>
     );
 }
